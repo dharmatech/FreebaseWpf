@@ -1,0 +1,19 @@
+﻿<Window x:Class="Freebase_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="603" Width="1422">
+    <Grid>
+        <TextBox x:Name="topicTextBox" HorizontalAlignment="Left" Height="23" Margin="37,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyDown="topicTextBox_KeyDown"/>
+
+        <Label x:Name="label0" Content="Ready" HorizontalAlignment="Left" Margin="232,38,0,0" VerticalAlignment="Top"/>
+        
+        <ListBox x:Name="topicPropertiesListBoxA" DisplayMemberPath="Key" HorizontalAlignment="Left" Height="371" Margin="10,94,0,0" VerticalAlignment="Top" Width="358" SelectionChanged="topicPropertiesListBoxA_SelectionChanged" />
+
+        <ListBox x:Name="propertyValuesListBoxA" DisplayMemberPath="[text]" HorizontalAlignment="Left" Height="371" Margin="373,94,0,0" VerticalAlignment="Top" Width="381" SelectionChanged="propertyValuesListBoxA_SelectionChanged" />
+
+        <ListBox x:Name="topicPropertiesListBoxB" DisplayMemberPath="Key" HorizontalAlignment="Left" Height="371" Margin="759,94,0,0" VerticalAlignment="Top" Width="280" SelectionChanged="topicPropertiesListBoxB_SelectionChanged"/>
+        
+        <ListBox x:Name="propertyValuesListBoxB" DisplayMemberPath="[text]" HorizontalAlignment="Left" Height="371" Margin="1044,94,0,0" VerticalAlignment="Top" Width="360"/>
+
+    </Grid>
+</Window>
