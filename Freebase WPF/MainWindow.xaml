@@ -14,6 +14,7 @@
         <ListBox x:Name="topicPropertiesListBoxB" DisplayMemberPath="Key" HorizontalAlignment="Left" Height="371" Margin="759,94,0,0" VerticalAlignment="Top" Width="280" SelectionChanged="topicPropertiesListBoxB_SelectionChanged"/>
         
         <ListBox x:Name="propertyValuesListBoxB" DisplayMemberPath="[text]" HorizontalAlignment="Left" Height="371" Margin="1044,94,0,0" VerticalAlignment="Top" Width="360"/>
+        <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="368,38,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

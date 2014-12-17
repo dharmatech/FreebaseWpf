@@ -13,6 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.ComponentModel;
+
+using System.Net;
+
 using RestSharp;
 using Newtonsoft.Json;
 
@@ -36,21 +40,41 @@ namespace Freebase_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        public MainWindow() { InitializeComponent(); }
 
         private void topicTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                topicPropertiesListBoxA.ItemsSource = 
-                    JsonConvert.DeserializeObject<FreebaseTopic>(
+                label0.Content = "Loading";
+
+                var backgroundWorker = new BackgroundWorker();
+
+                backgroundWorker.DoWork += (object s, DoWorkEventArgs arg) =>    
+                {
+                    var topic = arg.Argument as string;
+
+                    arg.Result =
                         new RestClient("https://www.googleapis.com")
-                            .Execute(new RestRequest(String.Format("freebase/v1/topic{0}", topicTextBox.Text)))
-                            .Content)
-                        .property;
+                            .Execute(new RestRequest(String.Format("freebase/v1/topic{0}", topic)));
+                };
+
+                backgroundWorker.RunWorkerCompleted += (object s, RunWorkerCompletedEventArgs arg) =>   
+                {
+                    var response = arg.Result as IRestResponse;
+
+                    label1.Content = response.StatusCode;
+
+                    if (response.StatusCode == HttpStatusCode.OK)
+                        topicPropertiesListBoxA.ItemsSource =
+                            JsonConvert
+                                .DeserializeObject<FreebaseTopic>(response.Content)
+                                .property;
+
+                    label0.Content = "Ready";    
+                };
+
+                backgroundWorker.RunWorkerAsync(topicTextBox.Text);
 
                 propertyValuesListBoxA.ItemsSource = null;
                 topicPropertiesListBoxB.ItemsSource = null;
